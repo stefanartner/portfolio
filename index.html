@@ -4,6 +4,7 @@
 <title>Stefan Artner</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <style>
@@ -36,7 +37,7 @@ body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <div class="w3-hide-large" style="margin-top:83px"></div>
   
   <!-- Photo grid -->
-  <div class="w3-row">
+  <div class="w3-row portfolio">
     <div class="w3-third">
       <img src="gallery/5.jpg" style="width:100%" onclick="onClick(this)" loading="lazy" alt="'Der Weg'<br>70x101<br>&copy; Stefan Artner">
      <img src="gallery/2.jpg" style="width:100%" onclick="onClick(this)" loading="lazy" alt="'Da kummt die Sunn'<br>92x112<br>&copy; Stefan Artner">
@@ -120,9 +121,24 @@ function onClick(element) {
   var captionText = document.getElementById("caption");
   captionText.innerHTML = element.alt;
 }
-
 </script>
 
+<script>
+$(function () {
+   var $images = $('.portfolio img');
+   var lastLoadIndex = 0;
+   var loadNextImage = function () {
+      if ($images.length === lastLoadIndex) {
+          return;
+      }
+console.log('loading image at index ' + lastLoadIndex);
+      $images.eq(lastLoadIndex).attr('src', $images.eq(lastLoadIndex).attr('data-src'));
+      lastLoadIndex += 1;
+   };
+   $images.on('load', loadNextImage);
+   loadNextImage();
+});
+</script>
 
 </body>
 </html>
